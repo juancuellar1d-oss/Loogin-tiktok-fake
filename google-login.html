@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Google – Iniciar sesión</title>
+  <link href="https://fonts.googleapis.com/css2?family=Google+Sans:wght@400;500&family=Roboto:wght@400;500&display=swap" rel="stylesheet"/>
+  <style>
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+    :root{
+      --blue:#1a73e8;--blue-h:#1557b0;--red:#ea4335;--yellow:#fbbc04;--green:#34a853;
+      --text:#202124;--muted:#5f6368;--border:#dadce0;--bg:#f8f9fa;--card:#fff;
+    }
+    body{
+      font-family:'Roboto',sans-serif;background:var(--bg);
+      min-height:100vh;display:flex;flex-direction:column;
+      align-items:center;justify-content:center;padding:20px;
+    }
+    .card{
+      background:var(--card);border-radius:28px;
+      padding:48px 48px 36px;width:100%;max-width:450px;
+      box-shadow:0 2px 10px rgba(0,0,0,.1),0 0 0 1px rgba(0,0,0,.06);
+      animation:fadeUp .45s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
+ 
+    .g-logo{display:flex;justify-content:center;margin-bottom:28px;}
+    .g-logo svg{width:75px;height:24px;}
+ 
+    h1{font-family:'Google Sans',sans-serif;font-size:24px;font-weight:400;color:var(--text);text-align:center;margin-bottom:8px;}
+    .subtitle{font-size:16px;color:var(--muted);text-align:center;margin-bottom:32px;}
+ 
+    .field{margin-bottom:16px;position:relative;}
+    .field input{
+      width:100%;padding:14px 16px;border:1px solid var(--border);
+      border-radius:4px;font-size:16px;font-family:'Roboto',sans-serif;
+      color:var(--text);outline:none;transition:border-color .2s,box-shadow .2s;
+      background:#fff;
+    }
+    .field input:focus{border-color:var(--blue);box-shadow:0 0 0 2px rgba(26,115,232,.2);}
+    .field label{
+      position:absolute;left:14px;top:50%;transform:translateY(-50%);
+      font-size:16px;color:var(--muted);pointer-events:none;
+      transition:all .15s;background:#fff;padding:0 4px;
+    }
+    .field input:focus ~ label,
+    .field input:not(:placeholder-shown) ~ label{
+      top:0;font-size:12px;color:var(--blue);
+    }
+    .field input:not(:focus):not(:placeholder-shown) ~ label{color:var(--muted);}
+ 
+    .forgot{font-size:14px;color:var(--blue);text-decoration:none;display:block;margin:-8px 0 24px;}
+    .forgot:hover{text-decoration:underline;}
+ 
+    .btn-next{
+      width:100%;padding:13px;border:none;border-radius:4px;
+      background:var(--blue);color:#fff;font-family:'Google Sans',sans-serif;
+      font-size:14px;font-weight:500;letter-spacing:.25px;cursor:pointer;
+      transition:background .2s,box-shadow .2s;
+    }
+    .btn-next:hover{background:var(--blue-h);box-shadow:0 1px 3px rgba(0,0,0,.3);}
+    .btn-next:active{background:#0d47a1;}
+ 
+    .divider{display:flex;align-items:center;gap:16px;margin:24px 0;color:var(--muted);font-size:14px;}
+    .divider::before,.divider::after{content:'';flex:1;height:1px;background:var(--border);}
+ 
+    .btn-create{
+      width:100%;padding:13px;border:1px solid var(--border);border-radius:4px;
+      background:#fff;color:var(--blue);font-family:'Google Sans',sans-serif;
+      font-size:14px;font-weight:500;cursor:pointer;transition:background .2s,border-color .2s;
+    }
+    .btn-create:hover{background:#f1f8ff;border-color:var(--blue);}
+ 
+    .back-link{
+      display:flex;align-items:center;gap:8px;margin-top:28px;justify-content:center;
+      font-size:12px;color:var(--muted);text-decoration:none;transition:color .2s;
+    }
+    .back-link:hover{color:var(--text);}
+    .back-link svg{width:16px;height:16px;}
+ 
+    footer{margin-top:24px;font-size:12px;color:var(--muted);text-align:center;line-height:2;}
+    footer a{color:var(--muted);text-decoration:none;margin:0 8px;}
+    footer a:hover{text-decoration:underline;}
+ 
+    /* loading dots */
+    .dots{display:inline-flex;gap:4px;align-items:center;}
+    .dots span{width:6px;height:6px;border-radius:50%;background:#fff;animation:dot .8s ease-in-out infinite;}
+    .dots span:nth-child(2){animation-delay:.15s;}
+    .dots span:nth-child(3){animation-delay:.3s;}
+    @keyframes dot{0%,80%,100%{transform:scale(0)}40%{transform:scale(1)}}
+  </style>
+</head>
+<body>
+<div class="card">
+  <!-- Google logo SVG -->
+  <div class="g-logo">
+    <svg viewBox="0 0 75 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M9.24 7.6c0-.52-.05-1.02-.13-1.5H3.36v2.84h3.3a2.83 2.83 0 01-1.23 1.86v1.54h1.99c1.17-1.07 1.84-2.65 1.84-4.74z" fill="#4285F4"/>
+      <path d="M3.36 12.96c1.66 0 3.05-.55 4.06-1.49l-1.99-1.54c-.55.37-1.25.58-2.07.58-1.59 0-2.94-1.07-3.42-2.51H-.1v1.6A6.12 6.12 0 003.36 12.96z" fill="#34A853"/>
+      <path d="M-.06 8c-.13-.37-.2-.77-.2-1.18 0-.41.07-.81.2-1.18V4.04h-2.04A6.12 6.12 0 00-2.76 6.82c0 .99.24 1.92.66 2.78L-.06 8z" fill="#FBBC05"/>
+      <path d="M3.36 3.31c.9 0 1.71.31 2.34.91l1.75-1.74A6.07 6.07 0 003.36.68 6.12 6.12 0 00-2.1 4.04l2.04 1.6C.42 4.39 1.77 3.31 3.36 3.31z" fill="#EA4335"/>
+      <!-- "oogle" text -->
+      <text x="14" y="17" font-family="Product Sans,Roboto,sans-serif" font-size="18" fill="#4285F4">o</text>
+      <text x="23" y="17" font-family="Product Sans,Roboto,sans-serif" font-size="18" fill="#EA4335">o</text>
+      <text x="32" y="17" font-family="Product Sans,Roboto,sans-serif" font-size="18" fill="#FBBC05">g</text>
+      <text x="40" y="17" font-family="Product Sans,Roboto,sans-serif" font-size="18" fill="#34A853">l</text>
+      <text x="46" y="17" font-family="Product Sans,Roboto,sans-serif" font-size="18" fill="#EA4335">e</text>
+    </svg>
+  </div>
+ 
+  <h1>Iniciar sesión</h1>
+  <p class="subtitle">Usa tu Cuenta de Google</p>
+ 
+  <div class="field">
+    <input type="email" id="email" placeholder=" " autocomplete="email"/>
+    <label for="email">Correo electrónico o teléfono</label>
+  </div>
+ 
+  <a href="#" class="forgot">¿Olvidaste tu dirección de correo electrónico?</a>
+ 
+  <p style="font-size:14px;color:var(--muted);margin-bottom:24px;">
+    ¿No es tu computadora? Usa el modo Invitado para iniciar sesión de forma privada.
+    <a href="#" style="color:var(--blue);text-decoration:none;">Más información</a>
+  </p>
+ 
+  <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;">
+    <button class="btn-create" onclick="window.location.href='tiktok-login.html'">Crear cuenta</button>
+    <button class="btn-next" id="nextBtn" onclick="handleNext(this)">Siguiente</button>
+  </div>
+ 
+  <a href="tiktok-login.html" class="back-link">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+    Volver a TikTok
+  </a>
+</div>
+ 
+<footer>
+  <div>
+    <a href="#">Español</a>
+  </div>
+  <div>
+    <a href="#">Ayuda</a>
+    <a href="#">Privacidad</a>
+    <a href="#">Condiciones</a>
+  </div>
+</footer>
+ 
+<script>
+function handleNext(btn){
+  const val = document.getElementById('email').value.trim();
+  if(!val){
+    document.querySelector('.field input').style.borderColor='var(--red)';
+    return;
+  }
+  btn.innerHTML='<span class="dots"><span></span><span></span><span></span></span>';
+  btn.disabled=true;
+  setTimeout(()=>{
+    btn.innerHTML='Siguiente';
+    btn.disabled=false;
+    // Show password field simulation
+    alert('✓ Correo verificado. En una implementación real continuaría al paso de contraseña.');
+  },1500);
+}
+</script>
+</body>
+</html>
+ 
